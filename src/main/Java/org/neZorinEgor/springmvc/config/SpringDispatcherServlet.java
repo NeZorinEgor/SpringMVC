@@ -2,7 +2,7 @@ package org.neZorinEgor.springmvc.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class MySpringDispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class SpringDispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[0];
@@ -10,7 +10,7 @@ public class MySpringDispatcherServlet extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {AppConfig.class};
+        return new Class[] {SpringConfig.class};
     }
 
     @Override

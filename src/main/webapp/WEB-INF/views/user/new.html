@@ -1,8 +1,15 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="eu">
+<html xmlns:th="http://www.thymeleaf.org" lang="eu">
 <form th:method="POST" th:action="@{/users}" th:object="${user}">
     <label>Name</label>
     <label for="name">Enter name</label>
     <input type="text" th:field="*{name}" id="name"/><br>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+    <label>Email</label>
+    <label for="email">Enter email</label>
+    <input type="text" th:field="*{email}" id="email"/><br>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
     <input type="submit" value="Add user"/>
 </form>
 </html>

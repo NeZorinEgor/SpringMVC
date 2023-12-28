@@ -5,3 +5,6 @@
 <div th:each="user : ${users}">
     <a th:text="${user.getName()}" th:href="@{/users/{id}(id=${user.getId()})}">userName</a>
 </div>
+
+
+<a th:href="@{/users/new}" th:text="new"/>

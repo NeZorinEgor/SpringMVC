@@ -16,10 +16,10 @@ public class UserDAO {
     {
         userList = new ArrayList<>();
 
-        userList.add(new User(++COUNTER, "ex1"));
-        userList.add(new User(++COUNTER, "ex2"));
-        userList.add(new User(++COUNTER, "ex3"));
-        userList.add(new User(++COUNTER, "BOB"));
+        userList.add(new User(++COUNTER, "sample BOB", "test@mail.org"));
+        userList.add(new User(++COUNTER, "sample EGOR", "test@mail.org"));
+        userList.add(new User(++COUNTER, "sample DANILA", "test@mail.org"));
+        userList.add(new User(++COUNTER, "sample DEDOR", "test@mail.org"));
     }
 
     public List<User> showAllUsers(){
@@ -33,5 +33,15 @@ public class UserDAO {
     public void create(User user) {
         user.setId(++COUNTER);
         userList.add(user);
+    }
+
+    public void delete(int id) {
+        userList.removeIf((user -> user.getId() == id));
+    }
+
+    public void update(int id, User user) {
+        User updateUser = findUserById(id);
+        updateUser.setName(user.getName());
+        updateUser.setEmail(user.getEmail());
     }
 }

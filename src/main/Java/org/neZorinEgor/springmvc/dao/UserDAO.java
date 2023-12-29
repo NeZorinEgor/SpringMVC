@@ -56,34 +56,54 @@ public class UserDAO {
     }
 
     public User findUserById(int id){
-        //return userList.stream().filter(user -> user.getId() == id).findAny().orElse(null);
-        return null;
+        User user = null;
+        PreparedStatement stmnt = null;
+        try {
+            stmnt = connection.prepareStatement("SELECT * FROM User WHERE id=?");
+            stmnt.setInt(1, id);
+            ResultSet rs = stmnt.executeQuery();
+            rs.next();
+            user = new User();
+            user.setId(rs.getInt("id"));
+            user.setName(rs.getString("name"));
+            user.setEmail(rs.getString("email"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
     }
 
     public void create(User user){
-        String query = "INSERT INTO User(name, email) value(" + "'" + user.getName() + "'" + ", " +  "'" + user.getEmail() + "'" + ")";
-        Statement statement = null;
         try {
-            statement = connection.createStatement();
+            PreparedStatement stmnt = connection.prepareStatement("INSERT INTO User(name, email) value (?, ?)");
+            stmnt.setString(1, user.getName());
+            stmnt.setString(2, user.getEmail());
+            stmnt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        try {
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     public void delete(int id) {
-        //userList.removeIf((user -> user.getId() == id));
+        try {
+            PreparedStatement stmnt = connection.prepareStatement("DELETE FROM `User` WHERE id=?");
+            stmnt.setInt(1, id);
+            stmnt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void update(int id, User user) {
-//        User updateUser = findUserById(id);
-//        updateUser.setName(user.getName());
-//        updateUser.setEmail(user.getEmail());
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("UPDATE User SET name=?, email=? WHERE id=?");
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setInt(3, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

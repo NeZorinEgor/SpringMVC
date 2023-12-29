@@ -60,9 +60,21 @@ public class UserDAO {
         return null;
     }
 
-    public void create(User user) {
-//        user.setId(++COUNTER);
-//        userList.add(user);
+    public void create(User user){
+        String query = "INSERT INTO User(name, email) value(" + "'" + user.getName() + "'" + ", " +  "'" + user.getEmail() + "'" + ")";
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void delete(int id) {

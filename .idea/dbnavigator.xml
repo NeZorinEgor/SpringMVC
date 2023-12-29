@@ -13,7 +13,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="b4f1a5ff-15d2-4c3a-9dd8-7b98baf10d88">
-      <console name="MySQL" type="STANDARD" schema="SpringMvc" session="Main" />
+      <console name="MySQL" type="STANDARD" schema="SpringMvc" session="Main"><![CDATA[select * from `User`;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
